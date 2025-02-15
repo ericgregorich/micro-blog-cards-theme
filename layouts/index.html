@@ -7,53 +7,64 @@
 {{ $list = sort $list "Title" }}
 {{ end }}
 <div class="archive_categories">
-	{{ range $list }}
-	<p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
-	{{ end }}
+  {{ range $list }}
+  <p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+  {{ end }}
 </div>
 {{ end }}
 {{ end }}
 
 <div class="home h-feed">
   <ul class="post-list">
-    {{ $paginator := .Paginate (where .Site.Pages.ByDate.Reverse "Type" "post") (index .Site.Params "paginate" | default 20) }}
+    {{ $paginator := .Paginate (where .Site.Pages.ByDate.Reverse "Type" "post") (index .Site.Params "paginate" | default
+    20) }}
     {{ range $paginator.Pages }}
 
-    {{ $postDateTimeSys :=  .Date.Format "2006-01-02T15:04:00Z" }}
+    {{ $postDateTimeSys := .Date.Format "2006-01-02T15:04:00Z" }}
     {{ $postDateTime := .Date.Format "January 2, 2006" }}
     {{ if .Site.Params.showPostTimeOnIndex}}
-	    {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
+    {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
     {{ end }}
 
     {{ if .Title }}
-      {{ if .Site.Params.showFullPost }}
-      <li class="post-list-item">
-        <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
-        <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
-        <div class="post-list-item-content">
-          {{ .Content }}
-        </div>
-
-      </li>
-      {{ else }}
-      <li class="post-list-item">
-        <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
-        <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
-        <div class="post-list-item-content">
-          <p>{{ .Summary | truncate 300 }} <a href="{{ .Permalink }}" class="continue-link">read more</a></p>
-        </div>
-      </li>
-      {{ end }}
+    <li class="post-list-item">
+      <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
+      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
+            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
+      <div class="post-list-item-content">
+        {{ if .Site.Params.showFullPost }}
+        {{ .Content }}
+        {{ else }}
+        <p>{{ .Summary | safeHTML}} <a href="{{ .Permalink }}" class="continue-link">Continue reading →</a></p>
+        {{ end }}
+      </div>
+    </li>
+    {{ else if in .RawContent "<!--more-->"}}
+    <li class="post-list-item">
+      <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
+      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
+            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
+      <div class="post-list-item-content">
+        {{ if .Site.Params.showFullPost }}
+        {{ .Content }}
+        {{ else }}
+        <p>{{ .Summary }} {{- if .Truncated }}<a href="{{ .Permalink }}" class="continue-link">Continue reading →</a>{{
+          end }}
+        </p>
+        {{ end }}
+      </div>
+    </li>
     {{ else }}
-      <li class="post-list-item">
-        <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
-              datetime="{{ .Date.Format " 2006-01-02 15:04:05 -0700" }}">{{ $postDateTime }}</time></span></a>
-        <div class="post-list-item-content">
-          {{ .Content }}
-        </div>
-      </li>
+    <li class="post-list-item">
+      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
+            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
+      <div class="post-list-item-content">
+        {{ .Content }}
+      </div>
+    </li>
     {{ end }}
     {{ end }}
+
   </ul>
 </div>
 <div class="pagination">

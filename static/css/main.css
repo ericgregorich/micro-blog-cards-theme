@@ -1,14 +1,14 @@
 /** CSS that is configurable through the plugin settings are applied in Cards.html file. */
 :root {
-  --font-family: Inter var,ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-    --font-size-normal: 18px;
-    --font-size-small: 15px;
-    --font-size-large: 22px;
-    --font-size-title: 22px;
-    --width-max: 780px;
-    --width-min: 350px;
-    --width-max-image: 720px;
-    --border-radius: 4px;
+  --font-family: Inter var, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --font-size-normal: 18px;
+  --font-size-small: 15px;
+  --font-size-large: 22px;
+  --font-size-title: 22px;
+  --width-max: 780px;
+  --width-min: 350px;
+  --width-max-image: 720px;
+  --border-radius: 4px;
 }
 
 /* ============================== Main ============================== */
@@ -247,7 +247,7 @@ a.post-list-item-date:hover {
 .post-list-item-date {
   display: block;
   text-align: center;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-small);
 }
 
 a.post-list-item-date {
@@ -357,6 +357,7 @@ blockquote {
 .related-content a:hover {
   color: var(--body-hover-color);
 }
+
 /* ============================== Site Footer ============================== */
 .site-footer {
   max-width: var(--width-max);
@@ -399,11 +400,13 @@ input[type='text'] {
 }
 
 @media (max-width: 500px) {
-  input[type='email'], input[type='text'] {
-   margin: 0px;
-     padding: 10px;
-     width: 65%;
- }
+
+  input[type='email'],
+  input[type='text'] {
+    margin: 0px;
+    padding: 10px;
+    width: 65%;
+  }
 }
 
 input[id='q'],
@@ -498,12 +501,14 @@ ul.blogroll li a span {
 
 /* ============================== Search Plugin ============================== */
 div#list_results {
-	margin-top: 10px;
-	background-color: var(--card-background-color);
+  margin-top: 10px;
+  background-color: var(--card-background-color);
 }
+
 div#list_results p a {
-	color: var(--card-accent-color);
+  color: var(--card-accent-color);
 }
+
 div#list_results p a:hover {
-	color: var(--card-hover-color);
+  color: var(--card-hover-color);
 }

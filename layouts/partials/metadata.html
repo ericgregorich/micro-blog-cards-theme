@@ -5,7 +5,9 @@
     {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
     {{ end }}
     <div class="cards-metadata-date">
-        <time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time>
+        <a href="{{ .Permalink }}" class="p-name u-url">
+            <time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time>
+        </a>
     </div>
     {{ if .Site.Params.showPostCategories }}
     {{ if .Params.categories }}

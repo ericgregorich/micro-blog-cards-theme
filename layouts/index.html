@@ -65,11 +65,6 @@
     </li>
     {{ else }}
     <li class="h-entry post-list-item">
-      <h2 class="p-name">
-        <a href="{{ .Permalink }}" class="p-url post-list-item-title">
-          {{ if .Title }}{{ .Title }}{{ else }}{{ $postDateTime }}{{ end }}
-        </a>
-      </h2>
       <div class="post-list-item-content e-content">
         {{ partial "metadata.html" . }}
         {{ .Content }}

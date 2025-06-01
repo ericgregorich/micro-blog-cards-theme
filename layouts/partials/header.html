@@ -1,27 +1,34 @@
 <header class="site-header">
   <div class="site-header-row">
-    <a class="site-header-logo-link" href="/">
-      {{ if .Site.Params.customblogimage}}
+    <a class="site-header-logo-link" href="{{ "/" | relURL }}">
+      {{ if .Site.Params.customblogimage }}
       <img src="{{ .Site.Params.customblogimage }}" class="site-image"
-        alt="{{ .Site.Title }}" />
+        alt="Logo for {{ .Site.Title }}" width="80" height="80" />
       {{ else }}
-      <img src="{{ .Site.Author.avatar }}" class="site-image"
-      alt="{{ .Site.Title }}" />
-      {{ end }}</a>
+      <img src="{{ .Site.Author.avatar }}" class="site-image" width="80" height="80"
+        alt="Avatar for {{ .Site.Title }}" />
+      {{ end }}
+    </a>
   </div>
   <div class="site-header-row">
-    <a class="site-header-title-link" href="/">{{ .Site.Title }}</a>
+    <a class="site-header-title-link" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
   </div>
-  {{ if .Site.Params.headertext}}
+  {{ if .Site.Params.headertext }}
   <div class="site-header-row">{{ .Site.Params.headertext }}</div>
   {{ end }}
   <div class="site-header-row">
-    <nav class="site-nav">
-      {{ range .Site.Menus.main }} {{ if .Page.Params.redirect }}
-      <a class="site-nav-link" href="{{ .Page.Params.redirect }}">{{ .Name }}</a>
-      {{ else }}
-      <a class="site-nav-link" href="{{ .URL | relLangURL | safeURL }}">{{ .Name }}</a>
-      {{ end }} {{ end }}
+    <nav class="site-nav" aria-label="Main navigation">
+      {{ range .Site.Menus.main }}
+        {{ if .Page }}
+          {{ if .Page.Params.redirect }}
+            <a class="site-nav-link" href="{{ .Page.Params.redirect }}">{{ .Name }}</a>
+          {{ else }}
+            <a class="site-nav-link" href="{{ .URL | relLangURL | safeURL }}">{{ .Name }}</a>
+          {{ end }}
+        {{ else }}
+          <a class="site-nav-link" href="{{ .URL | relLangURL | safeURL }}">{{ .Name }}</a>
+        {{ end }}
+      {{ end }}
     </nav>
   </div>
 </header>

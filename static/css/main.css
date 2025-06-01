@@ -150,10 +150,12 @@ div.archive_categories {
 }
 
 div.archive_categories p {
-  margin: 0 0 6px 0;
+  margin: 0;
+  padding: 0;
 }
 
-div.archive_categories p a {
+div.archive_categories p a,
+.tinylytics_kudos {
   color: var(--card-text-color);
   background-color: var(--card-background-color);
   border: 1px solid var(--card-border-color);
@@ -162,12 +164,42 @@ div.archive_categories p a {
   padding: 6px;
   white-space: nowrap;
   text-decoration: none;
-  margin: 0px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
 }
 
-div.archive_categories p a:hover {
+div.cards-metadata-categories span a {
+  color: var(--card-accent-color);
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  line-height: 2.5;
+}
+
+div.archive_categories p a:hover,
+div.cards-metadata-categories span a:hover,
+.tinylytics_kudos:hover {
   color: var(--card-hover-color);
-  border: 1px solid var(--card-hover-color);
+  font-size: var(--font-size-small);
+  text-decoration: underline;
+}
+
+.cards-metadata-categories {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cards-metadata-categories span {
+  margin: 0;
+  padding: 0;
+}
+
+.cards-kudos {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ============================== Site Content ============================== */
@@ -181,7 +213,7 @@ div.archive_categories p a:hover {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 0px;
+  padding: 0;
   margin: 4px 0 0 0;
 }
 
@@ -254,24 +286,6 @@ a.post-list-item-date {
   color: var(---meta-color);
 }
 
-/* ============================== Post Meta ============================== */
-.post-meta {
-  font-size: var(--font-size-small);
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-  flex-direction: row;
-  padding: 0 10px 10px 10px;
-  gap: 20px;
-}
-
-@media (max-width: 500px) {
-  .post-meta {
-    flex-direction: column;
-    gap: 5px;
-  }
-}
-
 /* ============================== Blockquotes ============================== */
 blockquote {
   border-left: 4px solid var(--blockquote-border);
@@ -286,6 +300,26 @@ blockquote {
   margin-right: 0px;
 }
 
+/* ============================== Metadata ============================== */
+.cards-metadata {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.cards-metadata .cards-metadata-date,
+.cards-metadata .cards-metadata-readingtime {
+  font-size: var(--font-size-small);
+  color: var(---meta-color);
+  line-height: 2.5;
+}
+
+.cards-metadata .cards-metadata-author {
+  display: none;
+}
+
 /* ============================== Response Options ============================== */
 .microblog_post {
   padding: 20px;
@@ -298,21 +332,24 @@ blockquote {
   flex-direction: row;
 }
 
+
 .response-options a,
-.response-options .tinylytics_kudos {
+.response-options .tinylytics_kudos,
+.cards-metadata .tinylytics_kudos {
   padding: 6px 8px 4px 8px;
   color: var(--card-text-color);
   border: 1px solid var(--card-border-color);
   font-size: var(--font-size-small);
-  margin: 5px;
   border-radius: 8px;
   background-color: var(--card-background-color);
   white-space: nowrap;
   text-decoration: none;
+  margin-bottom: 5px;
 }
 
 .response-options a:hover,
-.response-options button.tinylytics_kudos:hover {
+.response-options button.tinylytics_kudos:hover,
+.cards-metadata button.tinylytics_kudos:hover {
   color: var(--card-hover-color);
   border: 1px solid var(--card-hover-color);
 }

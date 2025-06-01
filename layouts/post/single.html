@@ -34,7 +34,9 @@
             {{ .Content }}
             {{ if .Site.Params.showTinylyticsKudos }}
             <div class="cards-kudos">
-                <button class="tinylytics_kudos" data-path="{{ .Permalink }}"></button>
+                <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+                    <span class="visually-hidden">Give Kudos</span>
+                </button>
             </div>
             {{ end }}
         </div>

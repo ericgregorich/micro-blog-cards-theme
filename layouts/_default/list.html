@@ -60,8 +60,10 @@
 				{{ end }}
 				{{ if .Site.Params.showTinylyticsKudos }}
 				<div class="cards-kudos">
-					<button class="tinylytics_kudos" data-path="{{ .Permalink }}"></button>
-				</div>
+                <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+                    <span class="visually-hidden">Give Kudos</span>
+                </button>
+            </div>
 				{{ end }}
 			</div>
 		</li>
@@ -81,8 +83,10 @@
 				{{ end }}
 				{{ if .Site.Params.showTinylyticsKudos }}
 				<div class="cards-kudos">
-					<button class="tinylytics_kudos" data-path="{{ .Permalink }}"></button>
-				</div>
+                <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+                    <span class="visually-hidden">Give Kudos</span>
+                </button>
+            </div>
 				{{ end }}
 			</div>
 		</li>
@@ -93,8 +97,10 @@
 				{{ .Content }}
 				{{ if .Site.Params.showTinylyticsKudos }}
 				<div class="cards-kudos">
-					<button class="tinylytics_kudos" data-path="{{ .Permalink }}"></button>
-				</div>
+                <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+                    <span class="visually-hidden">Give Kudos</span>
+                </button>
+            </div>
 				{{ end }}
 			</div>
 		</li>

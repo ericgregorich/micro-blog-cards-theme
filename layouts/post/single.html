@@ -33,15 +33,24 @@
         <div class="e-content">
             {{ .Content }}
             {{ if .Site.Params.showTinylyticsKudos }}
-            <div class="cards-kudos">
-                <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
-                    <span class="visually-hidden">Give Kudos</span>
-                </button>
+            <div class="cards-article-interactions">
+                <div class="cards-kudos">
+                    <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos"
+                        title="Give Kudos">
+                        <span class="visually-hidden">Give Kudos</span>
+                    </button>
+                </div>
+                {{ if templates.Exists "partials/conversation-link.html" }}{{ partial "conversation-link.html" . }}{{
+                end }}
+                {{ if templates.Exists "partials/reply-by-email.html" }}{{ partial "reply-by-email.html" . }}{{ end }}
+                {{ if templates.Exists "partials/reply-on-mastodon.html" }}{{ partial "reply-on-mastodon.html" . }} {{
+                end }}
+                {{ end }}
             </div>
-            {{ end }}
         </div>
     </article>
     {{ if eq .Type "post"}}
+
     {{ if templates.Exists "partials/cusdis.html" }} {{ partial "cusdis.html" . }}
     {{ end }}
     {{ end }}

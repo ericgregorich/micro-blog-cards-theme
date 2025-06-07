@@ -35,11 +35,12 @@
         <p class="p-summary">{{ .Summary | safeHTML}} <a href="{{ .Permalink }}" class="continue-link">Continue reading
             →</a></p>
         {{ end }}
-        {{ if .Site.Params.showTinylyticsKudos }}
-        <div class="cards-kudos">
-          <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
-            <span class="visually-hidden">Give Kudos</span>
-          </button>
+        {{ if .Site.Params.showTinylyticsKudos }}<div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
         </div>
         {{ end }}
       </div>
@@ -59,10 +60,12 @@
         </p>
         {{ end }}
         {{ if .Site.Params.showTinylyticsKudos }}
-        <div class="cards-kudos">
-          <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
-            <span class="visually-hidden">Give Kudos</span>
-          </button>
+        <div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
         </div>
         {{ end }}
       </div>
@@ -73,10 +76,12 @@
         {{ partial "metadata.html" . }}
         {{ .Content }}
         {{ if .Site.Params.showTinylyticsKudos }}
-        <div class="cards-kudos">
-          <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
-            <span class="visually-hidden">Give Kudos</span>
-          </button>
+        <div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
         </div>
         {{ end }}
       </div>

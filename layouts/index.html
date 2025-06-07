@@ -19,52 +19,75 @@
     {{ $paginator := .Paginate (where .Site.Pages.ByDate.Reverse "Type" "post") (index .Site.Params "paginate" | default
     20) }}
     {{ range $paginator.Pages }}
-
     {{ $postDateTimeSys := .Date.Format "2006-01-02T15:04:00Z" }}
     {{ $postDateTime := .Date.Format "January 2, 2006" }}
     {{ if .Site.Params.showPostTimeOnIndex}}
     {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
     {{ end }}
-
     {{ if .Title }}
-    <li class="post-list-item">
-      <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
-      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
-            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
-      <div class="post-list-item-content">
+    <li class="h-entry post-list-item">
+      <h2 class="p-name"><a href="{{ .Permalink }}" class="p-url post-list-item-title">{{ .Title }}</a></h2>
+      <div class="post-list-item-content e-content">
+        {{ partial "metadata.html" . }}
         {{ if .Site.Params.showFullPost }}
         {{ .Content }}
         {{ else }}
-        <p>{{ .Summary | safeHTML}} <a href="{{ .Permalink }}" class="continue-link">Continue reading →</a></p>
+        <p class="p-summary">{{ .Summary | safeHTML}} <a href="{{ .Permalink }}" class="continue-link">Continue reading
+            →</a></p>
+        {{ end }}
+        {{ if .Site.Params.showTinylyticsKudos }}<div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
+        </div>
         {{ end }}
       </div>
     </li>
     {{ else if in .RawContent "<!--more-->"}}
-    <li class="post-list-item">
-      <h1 class="p-name"><a href="{{ .Permalink }}" class="post-list-item-title">{{ .Title }}</a></h1>
-      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
-            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
-      <div class="post-list-item-content">
+    <li class="h-entry post-list-item">
+      <h2 class="p-name"><a href="{{ .Permalink }}" class="p-url post-list-item-title">{{ .Title }}</a></h2>
+      <div class="post-list-item-content e-content">
+        {{ partial "metadata.html" . }}
         {{ if .Site.Params.showFullPost }}
         {{ .Content }}
         {{ else }}
-        <p>{{ .Summary }} {{- if .Truncated }}<a href="{{ .Permalink }}" class="continue-link">Continue reading →</a>{{
+        <p class="p-summary">{{ .Summary | safeHTML}} {{- if .Truncated }}<a href="{{ .Permalink }}"
+            class="continue-link">Continue reading
+            →</a>{{
           end }}
         </p>
+        {{ end }}
+        {{ if .Site.Params.showTinylyticsKudos }}
+        <div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
+        </div>
         {{ end }}
       </div>
     </li>
     {{ else }}
-    <li class="post-list-item">
-      <a href="{{ .Permalink }}" class="post-list-item-date"><span class="post-meta"><time class="dt-published"
-            datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time></span></a>
-      <div class="post-list-item-content">
+    <li class="h-entry post-list-item">
+      <div class="post-list-item-content e-content">
+        {{ partial "metadata.html" . }}
         {{ .Content }}
+        {{ if .Site.Params.showTinylyticsKudos }}
+        <div class="cards-article-interactions">
+          <div class="cards-kudos">
+            <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos" title="Give Kudos">
+              <span class="visually-hidden">Give Kudos</span>
+            </button>
+          </div>
+        </div>
+        {{ end }}
       </div>
     </li>
     {{ end }}
     {{ end }}
-
   </ul>
 </div>
 <div class="pagination">

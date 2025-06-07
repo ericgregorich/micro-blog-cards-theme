@@ -2,23 +2,29 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ if .Title }}{{.Title }} - {{ .Site.Title }}{{else}}{{.Summary | truncate 50 }}{{end}}{{ end }}{{ end }}</title>
-  <meta name="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ if .Title }}{{.Title }} - {{ .Site.Title }}{{else}}{{.Summary | truncate 50 }}{{end}}{{ end }}"/>
-  {{ if .Summary }}
-  <meta name="description" content="{{ .Summary | truncate 160 }}" />
-  <meta name="og:description" content="{{ .Summary | truncate 160 }}" />
-  {{ else }}
-  <meta name="description" content="{{ .Site.Params.headertext | truncate 160 }}" />
-  <meta name="og:description" content="{{ .Site.Params.headertext | truncate 160 }}" />
-  {{end}}
-  {{ if .Site.Params.fediversecreator }}<meta name="fediverse:creator" content="{{ .Site.Params.fediversecreator }}"/>{{ end }}
-  <meta name="og:url" content="{{ .Permalink }}" />
+  <!-- SEO Description -->
+  <meta name="description" content="{{ if .Summary }}{{ .Summary | truncate 160 }}{{ else }}{{ .Site.Params.headertext | truncate 160 }}{{end}}" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ if .Title }}{{.Title }} - {{ .Site.Title }}{{else}}{{.Summary | truncate 50 }}{{end}}{{ end }}" />
+  <meta property="og:description" content="{{ if .Summary }}{{ .Summary | truncate 160 }}{{ else }}{{ .Site.Params.headertext | truncate 160 }}{{end}}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:type" content="website" />
+  {{ with .Params.images }}<meta property="og:image" content="{{ index . 0 }}" />{{ end }}
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ if .Title }}{{.Title }} - {{ .Site.Title }}{{else}}{{.Summary | truncate 50 }}{{end}}{{ end }}" />
+  <meta name="twitter:description" content="{{ if .Summary }}{{ .Summary | truncate 160 }}{{ else }}{{ .Site.Params.headertext | truncate 160 }}{{end}}" />
+  {{ with .Params.images }}<meta name="twitter:image" content="{{ index . 0 }}" />{{ end }}
+  <!-- Theme color for dark mode -->
   <meta name="theme-color" content="{{ .Site.Params.light_body_background_color }}">
+  {{ if .Site.Params.dark_body_background_color }}
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ .Site.Params.dark_body_background_color }}">
+  {{ end }}
   <link rel="shortcut icon" href="https://micro.blog/{{ .Site.Author.username }}/favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}"> 
   {{ partial "cards.html" . }}
   <link rel="canonical" href="{{ .Permalink }}" />
-
   {{ partial "microblog_head.html" . }}
 </head>

@@ -1,0 +1,42 @@
+<div class="cards-metadata">
+    {{ $postDateTimeSys := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+    {{ $postDateTime := .Date.Format "January 2, 2006" }}
+    {{ if .Site.Params.showPostTimeOnIndex}}
+    {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
+    {{ end }}
+    <div class="cards-metadata-date">
+        <a href="{{ .Permalink }}" class="p-name u-url">
+            <time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time>
+        </a>
+    </div>
+    {{ if .Site.Params.showPostCategories }}
+    {{ if .Params.categories }}
+    {{ with .Params.categories }}
+    <div class="cards-metadata-categories">
+        {{ range . }}
+        {{ $name := . }}
+        {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize)) }}
+        <span><a href="{{ .Permalink }}" class="p-category">{{ $name }}</a></span>
+        {{ end -}}
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if .Site.Params.showReadingTime }}
+    <div class="cards-metadata-readingtime">
+        {{ if gt .ReadingTime 1 }}
+        <span>Reading Time: {{ .ReadingTime }} minute{{ if ne .ReadingTime 1 }}s{{ end }}</span>
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ with .Params.audio }}
+    <div class="cards-metadata-audio">
+        <script type="text/javascript" src="https://micro.blog/narration.js?url={{ . }}"></script>
+    </div>
+    {{ end }}
+    <div class="cards-metadata-author" style="display:none">
+        <img class="u-photo" src="{{ .Site.Author.avatar }}" alt="{{ .Site.Author.name }}" />
+        <a rel="author" class="p-author h-card" style="display:none" href="/">{{ .Site.Author.name }}</a>
+    </div>
+</div>

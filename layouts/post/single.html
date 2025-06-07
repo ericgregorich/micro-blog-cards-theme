@@ -13,102 +13,46 @@
     </div>
     {{ end }}
     {{ end }}
-
-
-    {{ $postDateTimeSys := .Date.Format "2006-01-02T15:04:00Z" }}
+    {{ $postDateTimeSys := .Date.Format "2006-01-02T15:04:05Z07:00" }}
     {{ $postDateTime := .Date.Format "January 2, 2006" }}
     {{ if .Site.Params.showPostTimeOnIndex}}
     {{ $postDateTime = .Date.Format "January 2, 2006 3:04pm" }}
     {{ end }}
-
     <article class="post h-entry">
         <header class="post-header">
             {{ if .Title }}
             <h1 class="post-list-item-title p-name">{{ .Title }}</h1>
-            <div class="post-meta">
-                <span>
-                    <a class="u-url" href="{{ .Permalink }}">
-                        <time class="post-list-item-date dt-published" datetime="{{ $postDateTimeSys }}">{{
-                            $postDateTime
-                            }}</time>
-                    </a>
-                    {{ with .Params.audio }}
-                    <script type="text/javascript" src="https://micro.blog/narration.js?url={{ . }}"></script>
-                    {{ end }}
-                </span>
-                {{ if .Site.Params.showReadingTime }}
-                {{ if gt .ReadingTime 1 }} <span>Reading Time: {{ .ReadingTime }} minutes</span>{{ end }}
-                {{ end }}
-                <img class="u-photo" style="display: none" src="{{ .Site.Author.avatar }}"
-                    alt="{{ .Site.Author.name }}" />
-                <a rel="author" class="p-author h-card" style="display:none" href="/">{{ .Site.Author.name }}</a>
-            </div>
-            {{ if .Site.Params.showPostCategories }}
-            {{ if .Params.categories }}
-            <div class="archive_categories">
-                {{ with .Params.categories }}
-                {{ range . }}
-                {{ $name := . }}
-                {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy"
-                (printf "categories/%s" ($name | urlize))) }}
-                <p><a href="{{ .Permalink }}" class="p-category">{{ $name }}</a></p>
-                {{ end -}}
-                {{ end }}
-                {{ end }}
-            </div>
-            {{ end }}
-            {{ end }}
             {{ else }}
-            <h1 class="post-list-item-title">
-                <a class="u-url" href="{{ .Permalink }}">
-                    <time class="post-list-item-date dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime
-                        }}</time>
-                </a>
-                {{ with .Params.audio }}
-                <script type="text/javascript" src="https://micro.blog/narration.js?url={{ . }}"></script>
-                {{ end }}
+            <h1 class="post-list-item-title p-name">
+                <time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime
+                    }}</time>
             </h1>
-            <div class="post-meta">
-                <img class="u-photo" style="display: none" src="{{ .Site.Author.avatar }}"
-                    alt="{{ .Site.Author.name }}" />
-                <a rel="author" class="p-author h-card" style="display:none" href="/">{{ .Site.Author.name }}</a>
-            </div>
-            {{ if .Site.Params.showPostCategories }}
-            {{ if .Params.categories }}
-            <div class="archive_categories">
-                {{ with .Params.categories }}
-                {{ range . }}
-                {{ $name := . }}
-                {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" $name) | default ($.Site.GetPage "taxonomy"
-                (printf "categories/%s" ($name | urlize))) }}
-                <p><a href="{{ .Permalink }}" class="p-category">{{ $name }}</a></p>
-                {{ end -}}
-                {{ end }}
-                {{ end }}
-            </div>
-            {{ end }}{{ end }}
             {{ end }}
         </header>
-
+        {{ partial "metadata.html" . }}
         <div class="e-content">
             {{ .Content }}
+            {{ if .Site.Params.showTinylyticsKudos }}
+            <div class="cards-article-interactions">
+                <div class="cards-kudos">
+                    <button class="tinylytics_kudos" data-path="{{ .Permalink }}" aria-label="Give Kudos"
+                        title="Give Kudos">
+                        <span class="visually-hidden">Give Kudos</span>
+                    </button>
+                </div>
+                {{ if templates.Exists "partials/conversation-link.html" }}{{ partial "conversation-link.html" . }}{{
+                end }}
+                {{ if templates.Exists "partials/reply-by-email.html" }}{{ partial "reply-by-email.html" . }}{{ end }}
+                {{ if templates.Exists "partials/reply-on-mastodon.html" }}{{ partial "reply-on-mastodon.html" . }} {{
+                end }}
+                {{ end }}
+            </div>
         </div>
     </article>
     {{ if eq .Type "post"}}
-    {{ if or (templates.Exists "partials/reply-by-email.html") (templates.Exists "partials/conversation-link.html")
-    (templates.Exists "partials/reply-on-mastodon.html") (.Site.Params.showTinylyticsKudos) }}
-    <div class="response-options">
-        {{ if .Site.Params.showTinylyticsKudos}}<button class="tinylytics_kudos" type="button"
-            aria-label="Kudos"></button>{{ end }}
-        {{ if templates.Exists "partials/conversation-link.html" }}{{ partial "conversation-link.html" . }}{{ end }}
-        {{ if templates.Exists "partials/reply-by-email.html" }}{{ partial "reply-by-email.html" . }}{{ end }}
-        {{ if templates.Exists "partials/reply-on-mastodon.html" }}{{ partial "reply-on-mastodon.html" . }} {{ end }}
-    </div>
 
+    {{ if templates.Exists "partials/cusdis.html" }} {{ partial "cusdis.html" . }}
     {{ end }}
-
-    {{ if templates.Exists "partials/cusdis.html" }} {{ partial "cusdis.html" . }}{{ end }}
-
     {{ end }}
     {{ if .Site.Params.include_conversation }}
     <script src="https://micro.blog/conversation.js?url={{ .Permalink }}"></script>

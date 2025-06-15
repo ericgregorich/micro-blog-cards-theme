@@ -20,8 +20,8 @@ Cards is a simple and lightweight theme for Micro.blog.
 
 ## Donate
 
-![One-Time (Any Amount) ](https://donate.stripe.com/8x2bJ151x7y56729qyds400)
-![$1 per month ](https://buy.stripe.com/9B67sLctZ9GdbrmdGOds401)
+- [One-Time (Any Amount) ](https://donate.stripe.com/8x2bJ151x7y56729qyds400)
+- [$1 per month ](https://buy.stripe.com/9B67sLctZ9GdbrmdGOds401)
 
 ## Support
 If you have any issues, you can either create an issue on [GitHub](https://github.com/ericgregorich/micro-blog-cards-theme/issues), or send me an [email](https://ericgregorich.com).

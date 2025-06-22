@@ -1,5 +1,5 @@
 {
-  "version": "2.0.6",
+  "version": "2.0.7",
   "title": "Cards Theme",
   "description": "A simple and customizable Micro.blog theme.",
   "fields": [
@@ -76,6 +76,11 @@
     {
       "field": "params.showTinylyticsKudos",
       "label": "Enable Tinylytics Kudos?",
+      "type": "boolean"
+    },
+      {
+      "field": "params.keepTinylyticsKudosPrivate",
+      "label": "Keep Tinylytics Kudos Private?",
       "type": "boolean"
     },
     {

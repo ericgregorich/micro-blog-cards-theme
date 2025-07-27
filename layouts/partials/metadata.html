@@ -9,20 +9,6 @@
             <time class="dt-published" datetime="{{ $postDateTimeSys }}">{{ $postDateTime }}</time>
         </a>
     </div>
-    {{ if .Site.Params.showPostCategories }}
-    {{ if .Params.categories }}
-    {{ with .Params.categories }}
-    <div class="cards-metadata-categories">
-        {{ range . }}
-        {{ $name := . }}
-        {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize)) }}
-        <span><a href="{{ .Permalink }}" class="p-category">{{ $name }}</a></span>
-        {{ end -}}
-        {{ end }}
-    </div>
-    {{ end }}
-    {{ end }}
-    {{ end }}
     {{ if .Site.Params.showReadingTime }}
     <div class="cards-metadata-readingtime">
         {{ if gt .ReadingTime 1 }}
@@ -40,3 +26,15 @@
         <a rel="author" class="p-author h-card" style="display:none" href="/">{{ .Site.Author.name }}</a>
     </div>
 </div>
+{{ if .Site.Params.showPostCategories }}
+{{ if .Params.categories }}
+<div class="archive_categories" style="margin-top: 0.5em; flex-wrap: wrap;">
+    {{ range .Params.categories }}
+    {{ $name := . }}
+    {{ with $.Site.GetPage "taxonomy" (printf "categories/%s" ($name | urlize)) }}
+    <p><a href="{{ .Permalink }}">{{ $name }}</a></p>
+    {{ end -}}
+    {{ end }}
+</div>
+{{ end }}
+{{ end }}

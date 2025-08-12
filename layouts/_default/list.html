@@ -36,6 +36,9 @@
 		</a>
 		{{ end }}
 	</h1>
+	{{ with .Content }}
+	<div class="microblog_category_intro">{{ . }}</div>
+	{{ end }}
 </div>
 <div class="home h-feed">
 	<ul class="post-list">

@@ -5,18 +5,21 @@
   "fields": [
     {
       "field": "params.headertext",
-      "label": "Description to show in your header.",
-      "type": "text"
+      "label": "Description",
+      "type": "text",
+      "placeholder": "(Optional) Enter a description that shows in your site header."
     },
     {
       "field": "params.customblogimage",
-      "label": "URL to a custom site image.",
-      "type": "text"
+      "label": "Site Image",
+      "type": "text",
+      "placeholder": "(Optional) Enter a URL to a custom site image."
     },
     {
       "field": "params.fediversecreator",
       "label": "Fediverse Creator",
-      "type": "text"
+      "type": "text",
+      "placeholder": "(Optional) Enter your Fediverse handle for journalist byline highlightling."
     },
     {
       "field": "params.showFullPost",

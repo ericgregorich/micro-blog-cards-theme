@@ -294,7 +294,7 @@ div.photos-grid-container a:hover,
     color: var(--card-hover-color)
 }
 
-.post-list-item-content video {
+.e-content video {
 width: 100%
 }
 

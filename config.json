@@ -11,7 +11,7 @@
         "showCategoriesOnPost": true,
         "showCategoriesOnArchive": true,
         "showCategoriesOnCategory": true,
-        "showCategoriesOnHomepage": true,
+        "showCategoriesOnHomepage": false,
         "showPostCategories": true,
         "sortTags": true,
         "showTinylyticsKudos": false,
